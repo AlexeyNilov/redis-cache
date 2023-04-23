@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - image: 'redis/redis-stack:latest'
+          imagePullPolicy: IfNotPresent
+          name: redis
+          ports:
+            - containerPort: 8001
+              name: http
+              protocol: TCP
+            - containerPort: 6379
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          volumeMounts:
+            - name: redis-config
+              mountPath: /redis-stack.conf
+              subPath: redis-stack.conf
+      volumes:
+        - name: redis-config
+          configMap:
+            name: redis-config
+            items:
+            - key: redis-config
+              path: redis-stack.conf
