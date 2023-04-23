@@ -1,7 +1,7 @@
 import redis
 import json
 
-rdb = redis.StrictRedis(host='redis', port=6379, decode_responses=True)
+rdb = redis.StrictRedis(host='redis-service.default.svc.cluster.local', port=6379, decode_responses=True)
 data = {
     'key': 'value'
 }

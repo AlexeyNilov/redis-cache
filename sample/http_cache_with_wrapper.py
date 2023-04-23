@@ -2,7 +2,7 @@ import libs.redis_cache_wrapper
 import time
 # import json
 
-rc = libs.redis_cache_wrapper.RedisCacheWrapper(redis_host='redis')
+rc = libs.redis_cache_wrapper.RedisCacheWrapper(redis_host='redis-service.default.svc.cluster.local')
 rc.session.cache.clear()
 
 url = 'https://some_url'
